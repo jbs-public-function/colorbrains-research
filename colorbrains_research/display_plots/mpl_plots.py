@@ -102,3 +102,30 @@ def cmy_comparisons():
     fig.clear()
     plt.close()
     return filename
+
+
+def namedcolors_plots(colordict):
+    fig, ax = plt.subplots(figsize=(25,10))
+    offset = 0.3
+    for idx, (colorname, rgb) in enumerate(colordict.items()):
+        rect = patches.Rectangle((idx, 0), idx + 1, 1, linewidth=1, edgecolor=rgb, facecolor=rgb, alpha=0.6)
+        ax.add_patch(rect)
+
+    xaxis = list(colordict.keys())
+
+    ax.set_xlim(0, len(xaxis) + 1)
+    ax.set_ylim(0,1)
+    ax.set_xticks([i for i in range(len(xaxis))])
+    ax.set_xticklabels(xaxis)
+    plt.xticks(rotation = 45)
+    ax.axes.get_yaxis().set_visible(False)
+    ax.set_title(f'Matplotlib Named Colors')
+
+    
+    plt.tight_layout()
+    filename = get_plot_path('namedcolors_plots.png')
+    plt.savefig(filename)
+    fig.clear()
+    plt.close()
+
+    return filename
